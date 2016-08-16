@@ -1,0 +1,219 @@
+.class Lcom/android/systemui/qs/tiles/DdsTile$1;
+.super Landroid/os/AsyncTask;
+.source "DdsTile.java"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/android/systemui/qs/tiles/DdsTile;->switchDdsToNext()V
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x0
+    name = null
+.end annotation
+
+.annotation system Ldalvik/annotation/Signature;
+    value = {
+        "Landroid/os/AsyncTask",
+        "<",
+        "Ljava/lang/Void;",
+        "Ljava/lang/Void;",
+        "Ljava/lang/Void;",
+        ">;"
+    }
+.end annotation
+
+
+# instance fields
+.field final synthetic this$0:Lcom/android/systemui/qs/tiles/DdsTile;
+
+
+# direct methods
+.method constructor <init>(Lcom/android/systemui/qs/tiles/DdsTile;)V
+    .locals 0
+
+    .prologue
+    .line 151
+    iput-object p1, p0, Lcom/android/systemui/qs/tiles/DdsTile$1;->this$0:Lcom/android/systemui/qs/tiles/DdsTile;
+
+    invoke-direct {p0}, Landroid/os/AsyncTask;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method protected bridge synthetic doInBackground([Ljava/lang/Object;)Ljava/lang/Object;
+    .locals 1
+    .param p1, "x0"    # [Ljava/lang/Object;
+
+    .prologue
+    .line 151
+    check-cast p1, [Ljava/lang/Void;
+
+    .end local p1    # "x0":[Ljava/lang/Object;
+    invoke-virtual {p0, p1}, Lcom/android/systemui/qs/tiles/DdsTile$1;->doInBackground([Ljava/lang/Void;)Ljava/lang/Void;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method protected varargs doInBackground([Ljava/lang/Void;)Ljava/lang/Void;
+    .locals 5
+    .param p1, "params"    # [Ljava/lang/Void;
+
+    .prologue
+    .line 164
+    iget-object v3, p0, Lcom/android/systemui/qs/tiles/DdsTile$1;->this$0:Lcom/android/systemui/qs/tiles/DdsTile;
+
+    # getter for: Lcom/android/systemui/qs/tiles/DdsTile;->mContext:Landroid/content/Context;
+    invoke-static {v3}, Lcom/android/systemui/qs/tiles/DdsTile;->access$100(Lcom/android/systemui/qs/tiles/DdsTile;)Landroid/content/Context;
+
+    move-result-object v3
+
+    const-string v4, "phone"
+
+    invoke-virtual {v3, v4}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Landroid/telephony/TelephonyManager;
+
+    .line 166
+    .local v2, "tm":Landroid/telephony/TelephonyManager;
+    invoke-static {}, Landroid/telephony/SubscriptionManager;->getDefaultDataSubId()I
+
+    move-result v0
+
+    .line 167
+    .local v0, "dataPhoneId":I
+    invoke-virtual {v2}, Landroid/telephony/TelephonyManager;->getPhoneCount()I
+
+    move-result v1
+
+    .line 168
+    .local v1, "phoneCount":I
+    invoke-static {}, Lcom/android/internal/telephony/SubscriptionController;->getInstance()Lcom/android/internal/telephony/SubscriptionController;
+
+    move-result-object v3
+
+    add-int/lit8 v4, v0, 0x1
+
+    rem-int/2addr v4, v1
+
+    invoke-virtual {v3, v4}, Lcom/android/internal/telephony/SubscriptionController;->setDefaultDataSubId(I)V
+
+    .line 169
+    const/4 v3, 0x0
+
+    return-object v3
+.end method
+
+.method protected bridge synthetic onPostExecute(Ljava/lang/Object;)V
+    .locals 0
+    .param p1, "x0"    # Ljava/lang/Object;
+
+    .prologue
+    .line 151
+    check-cast p1, Ljava/lang/Void;
+
+    .end local p1    # "x0":Ljava/lang/Object;
+    invoke-virtual {p0, p1}, Lcom/android/systemui/qs/tiles/DdsTile$1;->onPostExecute(Ljava/lang/Void;)V
+
+    return-void
+.end method
+
+.method protected onPostExecute(Ljava/lang/Void;)V
+    .locals 2
+    .param p1, "result"    # Ljava/lang/Void;
+
+    .prologue
+    .line 174
+    invoke-super {p0, p1}, Landroid/os/AsyncTask;->onPostExecute(Ljava/lang/Object;)V
+
+    .line 175
+    iget-object v0, p0, Lcom/android/systemui/qs/tiles/DdsTile$1;->this$0:Lcom/android/systemui/qs/tiles/DdsTile;
+
+    # getter for: Lcom/android/systemui/qs/tiles/DdsTile;->mQSTileView:Lcom/android/systemui/qs/QSTileView;
+    invoke-static {v0}, Lcom/android/systemui/qs/tiles/DdsTile;->access$000(Lcom/android/systemui/qs/tiles/DdsTile;)Lcom/android/systemui/qs/QSTileView;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_0
+
+    .line 176
+    iget-object v0, p0, Lcom/android/systemui/qs/tiles/DdsTile$1;->this$0:Lcom/android/systemui/qs/tiles/DdsTile;
+
+    # getter for: Lcom/android/systemui/qs/tiles/DdsTile;->mQSTileView:Lcom/android/systemui/qs/QSTileView;
+    invoke-static {v0}, Lcom/android/systemui/qs/tiles/DdsTile;->access$000(Lcom/android/systemui/qs/tiles/DdsTile;)Lcom/android/systemui/qs/QSTileView;
+
+    move-result-object v0
+
+    const/high16 v1, 0x3f800000    # 1.0f
+
+    invoke-virtual {v0, v1}, Lcom/android/systemui/qs/QSTileView;->setAlpha(F)V
+
+    .line 177
+    iget-object v0, p0, Lcom/android/systemui/qs/tiles/DdsTile$1;->this$0:Lcom/android/systemui/qs/tiles/DdsTile;
+
+    # getter for: Lcom/android/systemui/qs/tiles/DdsTile;->mQSTileView:Lcom/android/systemui/qs/QSTileView;
+    invoke-static {v0}, Lcom/android/systemui/qs/tiles/DdsTile;->access$000(Lcom/android/systemui/qs/tiles/DdsTile;)Lcom/android/systemui/qs/QSTileView;
+
+    move-result-object v0
+
+    const/4 v1, 0x1
+
+    invoke-virtual {v0, v1}, Lcom/android/systemui/qs/QSTileView;->setEnabled(Z)V
+
+    .line 179
+    :cond_0
+    return-void
+.end method
+
+.method protected onPreExecute()V
+    .locals 2
+
+    .prologue
+    .line 154
+    invoke-super {p0}, Landroid/os/AsyncTask;->onPreExecute()V
+
+    .line 156
+    iget-object v0, p0, Lcom/android/systemui/qs/tiles/DdsTile$1;->this$0:Lcom/android/systemui/qs/tiles/DdsTile;
+
+    # getter for: Lcom/android/systemui/qs/tiles/DdsTile;->mQSTileView:Lcom/android/systemui/qs/QSTileView;
+    invoke-static {v0}, Lcom/android/systemui/qs/tiles/DdsTile;->access$000(Lcom/android/systemui/qs/tiles/DdsTile;)Lcom/android/systemui/qs/QSTileView;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_0
+
+    .line 157
+    iget-object v0, p0, Lcom/android/systemui/qs/tiles/DdsTile$1;->this$0:Lcom/android/systemui/qs/tiles/DdsTile;
+
+    # getter for: Lcom/android/systemui/qs/tiles/DdsTile;->mQSTileView:Lcom/android/systemui/qs/QSTileView;
+    invoke-static {v0}, Lcom/android/systemui/qs/tiles/DdsTile;->access$000(Lcom/android/systemui/qs/tiles/DdsTile;)Lcom/android/systemui/qs/QSTileView;
+
+    move-result-object v0
+
+    const/high16 v1, 0x3f000000    # 0.5f
+
+    invoke-virtual {v0, v1}, Lcom/android/systemui/qs/QSTileView;->setAlpha(F)V
+
+    .line 158
+    iget-object v0, p0, Lcom/android/systemui/qs/tiles/DdsTile$1;->this$0:Lcom/android/systemui/qs/tiles/DdsTile;
+
+    # getter for: Lcom/android/systemui/qs/tiles/DdsTile;->mQSTileView:Lcom/android/systemui/qs/QSTileView;
+    invoke-static {v0}, Lcom/android/systemui/qs/tiles/DdsTile;->access$000(Lcom/android/systemui/qs/tiles/DdsTile;)Lcom/android/systemui/qs/QSTileView;
+
+    move-result-object v0
+
+    const/4 v1, 0x0
+
+    invoke-virtual {v0, v1}, Lcom/android/systemui/qs/QSTileView;->setEnabled(Z)V
+
+    .line 160
+    :cond_0
+    return-void
+.end method
