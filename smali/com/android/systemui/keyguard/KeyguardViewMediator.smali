@@ -2960,23 +2960,28 @@
     iget-boolean v1, p0, Lcom/android/systemui/keyguard/KeyguardViewMediator;->mShowing:Z
 
     invoke-interface {p1, v1}, Lcom/android/internal/policy/IKeyguardStateCallback;->onShowingStateChanged(Z)V
+
+    .line 1643
+    iget-boolean v1, p0, Lcom/android/systemui/keyguard/KeyguardViewMediator;->mInputRestricted:Z
+
+    invoke-interface {p1, v1}, Lcom/android/internal/policy/IKeyguardStateCallback;->onInputRestrictedStateChanged(Z)V
     :try_end_1
     .catch Landroid/os/RemoteException; {:try_start_1 .. :try_end_1} :catch_0
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 1646
+    .line 1647
     :goto_0
     :try_start_2
     monitor-exit p0
 
-    .line 1647
+    .line 1648
     return-void
 
-    .line 1643
+    .line 1644
     :catch_0
     move-exception v0
 
-    .line 1644
+    .line 1645
     .local v0, "e":Landroid/os/RemoteException;
     const-string v1, "KeyguardViewMediator"
 
@@ -2986,7 +2991,7 @@
 
     goto :goto_0
 
-    .line 1646
+    .line 1647
     .end local v0    # "e":Landroid/os/RemoteException;
     :catchall_0
     move-exception v1

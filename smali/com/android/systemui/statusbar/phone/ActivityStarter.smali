@@ -6,3 +6,6 @@
 # virtual methods
 .method public abstract startActivity(Landroid/content/Intent;Z)V
 .end method
+
+.method public abstract startPendingIntentDismissingKeyguard(Landroid/app/PendingIntent;)V
+.end method

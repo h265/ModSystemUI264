@@ -1,14 +1,11 @@
 .class Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy$4;
-.super Ljava/lang/Object;
+.super Landroid/os/storage/StorageEventListener;
 .source "PhoneStatusBarPolicy.java"
-
-# interfaces
-.implements Lcom/android/systemui/statusbar/policy/HotspotController$Callback;
 
 
 # annotations
-.annotation system Ldalvik/annotation/EnclosingClass;
-    value = Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;-><init>(Landroid/content/Context;Lcom/android/systemui/statusbar/policy/CastController;Lcom/android/systemui/statusbar/policy/HotspotController;)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -26,33 +23,29 @@
     .locals 0
 
     .prologue
-    .line 416
+    .line 219
     iput-object p1, p0, Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy$4;->this$0:Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;
 
-    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+    invoke-direct {p0}, Landroid/os/storage/StorageEventListener;-><init>()V
 
     return-void
 .end method
 
 
 # virtual methods
-.method public onHotspotChanged(Z)V
-    .locals 2
-    .param p1, "enabled"    # Z
+.method public onStorageStateChanged(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+    .locals 1
+    .param p1, "path"    # Ljava/lang/String;
+    .param p2, "oldState"    # Ljava/lang/String;
+    .param p3, "newState"    # Ljava/lang/String;
 
     .prologue
-    .line 419
+    .line 222
     iget-object v0, p0, Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy$4;->this$0:Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;
 
-    # getter for: Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;->mService:Landroid/app/StatusBarManager;
-    invoke-static {v0}, Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;->access$900(Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;)Landroid/app/StatusBarManager;
+    # invokes: Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;->updateSDCardtoAbsent()V
+    invoke-static {v0}, Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;->access$1000(Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;)V
 
-    move-result-object v0
-
-    const-string v1, "hotspot"
-
-    invoke-virtual {v0, v1, p1}, Landroid/app/StatusBarManager;->setIconVisibility(Ljava/lang/String;Z)V
-
-    .line 420
+    .line 223
     return-void
 .end method

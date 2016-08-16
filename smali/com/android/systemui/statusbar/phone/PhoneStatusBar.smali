@@ -390,6 +390,8 @@
 
 .field private mWaitingForKeyguardExit:Z
 
+.field mWeatherController:Lcom/android/systemui/statusbar/policy/WeatherControllerImpl;
+
 .field mZenModeController:Lcom/android/systemui/statusbar/policy/ZenModeController;
 
 .field private showTaskList:Z
@@ -12742,7 +12744,7 @@
 
     move-result v3
 
-    if-eqz v3, :cond_10
+    if-eqz v3, :cond_11
 
     .line 1059
     new-instance v3, Lcom/android/systemui/statusbar/policy/MSimNetworkControllerImpl;
@@ -13031,7 +13033,7 @@
 
     iget-object v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mCarrierLabel:Landroid/widget/TextView;
 
-    if-eqz v3, :cond_d
+    if-eqz v3, :cond_e
 
     const/4 v3, 0x1
 
@@ -13116,7 +13118,7 @@
 
     iget-boolean v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mCarrierLabelVisible:Z
 
-    if-eqz v3, :cond_e
+    if-eqz v3, :cond_f
 
     const/4 v3, 0x0
 
@@ -13132,7 +13134,7 @@
 
     move-result v3
 
-    if-eqz v3, :cond_f
+    if-eqz v3, :cond_10
 
     .line 1091
     move-object/from16 v0, p0
@@ -13268,7 +13270,28 @@
 
     iput-object v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mUserSwitcherController:Lcom/android/systemui/statusbar/policy/UserSwitcherController;
 
-    .line 1160
+    .line 1159
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mWeatherController:Lcom/android/systemui/statusbar/policy/WeatherControllerImpl;
+
+    if-nez v2, :cond_b
+
+    .line 1260
+    new-instance v2, Lcom/android/systemui/statusbar/policy/WeatherControllerImpl;
+
+    move-object/from16 v0, p0
+
+    iget-object v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mContext:Landroid/content/Context;
+
+    invoke-direct {v2, v3}, Lcom/android/systemui/statusbar/policy/WeatherControllerImpl;-><init>(Landroid/content/Context;)V
+
+    move-object/from16 v0, p0
+
+    iput-object v2, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mWeatherController:Lcom/android/systemui/statusbar/policy/WeatherControllerImpl;
+
+    .line 1161
+    :cond_b
     new-instance v2, Lcom/android/systemui/statusbar/policy/KeyguardUserSwitcher;
 
     move-object/from16 v0, p0
@@ -13327,14 +13350,14 @@
 
     iget-object v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mQSPanel:Lcom/android/systemui/qs/QSPanel;
 
-    if-eqz v3, :cond_b
+    if-eqz v3, :cond_c
 
     .line 1169
     invoke-virtual/range {p0 .. p0}, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->isMSim()Z
 
     move-result v3
 
-    if-eqz v3, :cond_16
+    if-eqz v3, :cond_17
 
     .line 1170
     new-instance v2, Lcom/sonymobile/systemui/qs/SomcQSTileHost;
@@ -13518,7 +13541,7 @@
 
     .line 1203
     .end local v2    # "qsh":Lcom/android/systemui/statusbar/phone/QSTileHost;
-    :cond_b
+    :cond_c
     move-object/from16 v0, p0
 
     iget-object v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mContext:Landroid/content/Context;
@@ -13533,7 +13556,7 @@
 
     move-result v3
 
-    if-eqz v3, :cond_c
+    if-eqz v3, :cond_d
 
     .line 1204
     move-object/from16 v0, p0
@@ -13609,7 +13632,7 @@
     invoke-virtual {v3, v4}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
     .line 1219
-    :cond_c
+    :cond_d
     move-object/from16 v0, p0
 
     iget-object v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mHeader:Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;
@@ -13668,6 +13691,17 @@
 
     invoke-virtual {v3, v4}, Lcom/android/systemui/BatteryMeterView;->setBatteryController(Lcom/android/systemui/statusbar/policy/BatteryController;)V
 
+    .line 1225
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mHeader:Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;
+
+    move-object/from16 v0, p0
+
+    iget-object v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mWeatherController:Lcom/android/systemui/statusbar/policy/WeatherControllerImpl;
+
+    invoke-virtual {v2, v3}, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;->setWeatherController(Lcom/android/systemui/statusbar/policy/WeatherController;)V
+
     .line 1226
     move-object/from16 v0, p0
 
@@ -13719,7 +13753,7 @@
 
     move-result v3
 
-    if-eqz v3, :cond_17
+    if-eqz v3, :cond_18
 
     const-string v3, "android.intent.action.SCREEN_ON"
 
@@ -13807,19 +13841,19 @@
     .restart local v35    # "signalCluster":Lcom/android/systemui/statusbar/MSimSignalClusterView;
     .restart local v36    # "signalClusterKeyguard":Lcom/android/systemui/statusbar/MSimSignalClusterView;
     .restart local v37    # "signalClusterQs":Lcom/android/systemui/statusbar/MSimSignalClusterView;
-    :cond_d
+    :cond_e
     const/4 v3, 0x0
 
     goto/16 :goto_5
 
     .line 1086
-    :cond_e
+    :cond_f
     const/4 v3, 0x4
 
     goto/16 :goto_6
 
     .line 1093
-    :cond_f
+    :cond_10
     move-object/from16 v0, p0
 
     iget-object v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mMSimNetworkController:Lcom/android/systemui/statusbar/policy/MSimNetworkControllerImpl;
@@ -13837,7 +13871,7 @@
     .end local v35    # "signalCluster":Lcom/android/systemui/statusbar/MSimSignalClusterView;
     .end local v36    # "signalClusterKeyguard":Lcom/android/systemui/statusbar/MSimSignalClusterView;
     .end local v37    # "signalClusterQs":Lcom/android/systemui/statusbar/MSimSignalClusterView;
-    :cond_10
+    :cond_11
     new-instance v3, Lcom/android/systemui/statusbar/policy/NetworkControllerImpl;
 
     move-object/from16 v0, p0
@@ -13984,7 +14018,7 @@
 
     .line 1123
     .local v29, "isAPhone":Z
-    if-eqz v29, :cond_11
+    if-eqz v29, :cond_12
 
     .line 1124
     move-object/from16 v0, p0
@@ -13998,7 +14032,7 @@
     invoke-virtual {v3, v4}, Lcom/android/systemui/statusbar/policy/NetworkControllerImpl;->addEmergencyLabelView(Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;)V
 
     .line 1127
-    :cond_11
+    :cond_12
     move-object/from16 v0, p0
 
     iget-object v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mStatusBarWindow:Lcom/android/systemui/statusbar/phone/StatusBarWindowView;
@@ -14020,7 +14054,7 @@
 
     iget-object v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mCarrierLabel:Landroid/widget/TextView;
 
-    if-eqz v3, :cond_13
+    if-eqz v3, :cond_14
 
     const/4 v3, 0x1
 
@@ -14032,7 +14066,7 @@
     .line 1129
     sget-boolean v3, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->DEBUG:Z
 
-    if-eqz v3, :cond_12
+    if-eqz v3, :cond_13
 
     const-string v3, "PhoneStatusBar"
 
@@ -14075,7 +14109,7 @@
     invoke-static {v3, v4}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 1130
-    :cond_12
+    :cond_13
     move-object/from16 v0, p0
 
     iget-boolean v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mShowCarrierInPanel:Z
@@ -14091,7 +14125,7 @@
 
     iget-boolean v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mCarrierLabelVisible:Z
 
-    if-eqz v3, :cond_14
+    if-eqz v3, :cond_15
 
     const/4 v3, 0x0
 
@@ -14107,7 +14141,7 @@
 
     move-result v3
 
-    if-eqz v3, :cond_15
+    if-eqz v3, :cond_16
 
     .line 1136
     move-object/from16 v0, p0
@@ -14123,19 +14157,19 @@
     goto/16 :goto_8
 
     .line 1128
-    :cond_13
+    :cond_14
     const/4 v3, 0x0
 
     goto :goto_b
 
     .line 1131
-    :cond_14
+    :cond_15
     const/4 v3, 0x4
 
     goto :goto_c
 
     .line 1138
-    :cond_15
+    :cond_16
     move-object/from16 v0, p0
 
     iget-object v3, v0, Lcom/android/systemui/statusbar/phone/PhoneStatusBar;->mNetworkController:Lcom/android/systemui/statusbar/policy/NetworkControllerImpl;
@@ -14153,7 +14187,7 @@
     .end local v35    # "signalCluster":Lcom/android/systemui/statusbar/SignalClusterView;
     .end local v36    # "signalClusterKeyguard":Lcom/android/systemui/statusbar/SignalClusterView;
     .end local v37    # "signalClusterQs":Lcom/android/systemui/statusbar/SignalClusterView;
-    :cond_16
+    :cond_17
     new-instance v2, Lcom/sonymobile/systemui/qs/SomcQSTileHost;
 
     move-object/from16 v0, p0
@@ -14268,7 +14302,7 @@
     .line 1230
     .end local v2    # "qsh":Lcom/android/systemui/statusbar/phone/QSTileHost;
     .restart local v30    # "pm":Landroid/os/PowerManager;
-    :cond_17
+    :cond_18
     const-string v3, "android.intent.action.SCREEN_OFF"
 
     goto/16 :goto_a

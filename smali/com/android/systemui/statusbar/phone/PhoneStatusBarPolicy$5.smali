@@ -3,7 +3,7 @@
 .source "PhoneStatusBarPolicy.java"
 
 # interfaces
-.implements Lcom/android/systemui/statusbar/policy/CastController$Callback;
+.implements Lcom/android/systemui/statusbar/policy/HotspotController$Callback;
 
 
 # annotations
@@ -26,7 +26,7 @@
     .locals 0
 
     .prologue
-    .line 423
+    .line 430
     iput-object p1, p0, Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy$5;->this$0:Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -36,16 +36,23 @@
 
 
 # virtual methods
-.method public onCastDevicesChanged()V
-    .locals 1
+.method public onHotspotChanged(Z)V
+    .locals 2
+    .param p1, "enabled"    # Z
 
     .prologue
-    .line 426
+    .line 433
     iget-object v0, p0, Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy$5;->this$0:Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;
 
-    # invokes: Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;->updateCast()V
-    invoke-static {v0}, Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;->access$1000(Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;)V
+    # getter for: Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;->mService:Landroid/app/StatusBarManager;
+    invoke-static {v0}, Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;->access$900(Lcom/android/systemui/statusbar/phone/PhoneStatusBarPolicy;)Landroid/app/StatusBarManager;
 
-    .line 427
+    move-result-object v0
+
+    const-string v1, "hotspot"
+
+    invoke-virtual {v0, v1, p1}, Landroid/app/StatusBarManager;->setIconVisibility(Ljava/lang/String;Z)V
+
+    .line 434
     return-void
 .end method

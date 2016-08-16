@@ -162,7 +162,7 @@
     const/4 v3, 0x0
 
     .line 880
-    if-eqz p1, :cond_1
+    if-eqz p1, :cond_2
 
     move v0, v2
 
@@ -176,7 +176,7 @@
 
     move-result-object v5
 
-    if-nez v0, :cond_2
+    if-nez v0, :cond_3
 
     move v4, v2
 
@@ -191,7 +191,7 @@
 
     move-result-object v5
 
-    if-nez v0, :cond_3
+    if-nez v0, :cond_4
 
     move v4, v2
 
@@ -216,14 +216,14 @@
 
     move-result-object v5
 
-    if-nez v0, :cond_4
+    if-nez v0, :cond_5
 
     move v4, v2
 
     :goto_3
     invoke-direct {p0, v5, v4}, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView$5;->transition(Landroid/view/View;Z)V
 
-    .line 886
+    .line 885
     :cond_0
     iget-object v4, p0, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView$5;->this$0:Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;
 
@@ -234,14 +234,39 @@
 
     invoke-direct {p0, v4, v0}, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView$5;->transition(Landroid/view/View;Z)V
 
+    .line 886
+    iget-object v4, p0, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView$5;->this$0:Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;
+
+    # getter for: Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;->mShowWeather:Z
+    invoke-static {v4}, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;->access$2100(Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;)Z
+
+    move-result v4
+
+    if-eqz v4, :cond_1
+
+    iget-object v4, p0, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView$5;->this$0:Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;
+
+    # getter for: Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;->mWeatherContainer:Landroid/view/ViewGroup;
+    invoke-static {v4}, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;->access$2200(Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;)Landroid/view/ViewGroup;
+
+    move-result-object v5
+
+    if-nez v0, :cond_6
+
+    move v4, v2
+
+    :goto_4
+    invoke-direct {p0, v5, v4}, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView$5;->transition(Landroid/view/View;Z)V
+
     .line 887
+    :cond_1
     iget-object v4, p0, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView$5;->this$0:Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;
 
     # setter for: Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;->mShowingDetail:Z
     invoke-static {v4, v0}, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;->access$1702(Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;Z)Z
 
     .line 888
-    if-eqz v0, :cond_6
+    if-eqz v0, :cond_8
 
     .line 889
     iget-object v4, p0, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView$5;->this$0:Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;
@@ -264,7 +289,7 @@
 
     .line 891
     .local v1, "toggleState":Ljava/lang/Boolean;
-    if-nez v1, :cond_5
+    if-nez v1, :cond_7
 
     .line 892
     iget-object v2, p0, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView$5;->this$0:Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;
@@ -290,38 +315,44 @@
 
     .line 908
     .end local v1    # "toggleState":Ljava/lang/Boolean;
-    :goto_4
+    :goto_5
     return-void
 
     .end local v0    # "showingDetail":Z
-    :cond_1
+    :cond_2
     move v0, v3
 
     .line 880
     goto :goto_0
 
     .restart local v0    # "showingDetail":Z
-    :cond_2
+    :cond_3
     move v4, v3
 
     .line 881
     goto :goto_1
 
-    :cond_3
+    :cond_4
     move v4, v3
 
     .line 882
     goto :goto_2
 
-    :cond_4
+    :cond_5
     move v4, v3
 
     .line 884
     goto :goto_3
 
+    :cond_6
+    move v4, v3
+
+    .line 886
+    goto :goto_4
+
     .line 895
     .restart local v1    # "toggleState":Ljava/lang/Boolean;
-    :cond_5
+    :cond_7
     iget-object v4, p0, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView$5;->this$0:Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;
 
     # getter for: Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;->mQsDetailHeaderSwitch:Landroid/widget/Switch;
@@ -369,11 +400,11 @@
 
     invoke-virtual {v2, v3}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    goto :goto_4
+    goto :goto_5
 
     .line 906
     .end local v1    # "toggleState":Ljava/lang/Boolean;
-    :cond_6
+    :cond_8
     iget-object v2, p0, Lcom/android/systemui/statusbar/phone/StatusBarHeaderView$5;->this$0:Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;
 
     # getter for: Lcom/android/systemui/statusbar/phone/StatusBarHeaderView;->mQsDetailHeader:Landroid/view/View;
@@ -383,7 +414,7 @@
 
     invoke-virtual {v2, v3}, Landroid/view/View;->setClickable(Z)V
 
-    goto :goto_4
+    goto :goto_5
 .end method
 
 .method private handleToggleStateChanged(Z)V
